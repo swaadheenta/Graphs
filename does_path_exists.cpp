@@ -12,29 +12,30 @@ bool ispossible=false;
 5-6
 4-6
 */
-void doespathexits(int s,int d,map<int,vector<int>>mp,map<int,int>visited)
+void doespathexits(int s,int d,map<int,vector<int>>mp,map<int,int>visited, string ans)
 {
      if(s==d)
      {
-         cout<<"s= "<<s<<"d= "<<d<<"\n";
+         cout<<ans<<"\n";
          ispossible=true;
-         cout<<ispossible;
+        
          return;
      }
      vector<int>v=mp[s];
-     cout<<"s= "<<s;
+    
      visited[s]=true;
      for(int i=0;i<v.size();i++)
      {
-          cout<<"v[i] = "<<v[i]<<" ";
+        
          if(visited[v[i]]==false)
          {
-            cout<<"vis[i] "<<v[i]<<"\n";
-             doespathexits(v[i],d,mp,visited);
-              // visited[v[i]]=true;
+            
+             doespathexits(v[i],d,mp,visited,ans+to_string(v[i]));
+              
          }
      }
-     return;
+     visited[s]=false;
+     
 }
 int main()
 {
@@ -68,7 +69,7 @@ int main()
     int src,dest;
     cin>>src>>dest;
 
-    doespathexits(src,dest,mp,visited);
+    doespathexits(src,dest,mp,visited,to_string(src));
     if(ispossible)
     cout<<"true";
     else
